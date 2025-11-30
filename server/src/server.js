@@ -26,8 +26,10 @@ dotenv.config({ path: "../.env" });
 const app = express();
 
 app.use(express.json());
+app.options("*", cors());
 app.use(cors({
-  origin: process.env.CLIENT_URL || "http://localhost:5173",
+  origin: "https://career-karma-ef8u.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
