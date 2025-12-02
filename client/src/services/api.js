@@ -32,19 +32,14 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://careerkarma-kiae.onrender.com/api",
+  baseURL: import.meta.env.VITE_API_URL || "https://careerkarma-kiae.onrender.com/api",
   headers: { "Content-Type": "application/json" },
   withCredentials: true,
 });
 
 export const registerUser = (data) => api.post("/auth/register", data);
+export const verifyUser = (data) => api.post("/auth/verify", data);
 export const loginUser = (data) => api.post("/auth/login", data);
-
-export const createJob = (data) => api.post("/jobs", data);
-export const getAllJobs = () => api.get("/jobs");
-
-export const applyJob = (data) => api.post("/applications", data);
-export const getMyApplications = () => api.get("/applications/my");
 
 export function setAuth(token) {
   if (token) {
@@ -55,12 +50,6 @@ export function setAuth(token) {
     localStorage.removeItem("token");
   }
 }
-
-export function logout() {
-  setAuth(null);
-}
-
 const savedToken = localStorage.getItem("token");
 if (savedToken) setAuth(savedToken);
-
 export default api;
