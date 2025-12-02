@@ -16,7 +16,6 @@ export default function Register() {
 
   const nav = useNavigate();
 
-  // Handle user registration
   async function submit(e) {
     e.preventDefault();
     setError("");
