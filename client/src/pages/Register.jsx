@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import api from "../services/api";
-import { registerUser } from "../services/api";
-import { verifyUser } from "../services/api";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -23,13 +21,7 @@ export default function Register() {
     setError("");
     setLoading(true);
     try {
-      // const { data } = await api.post("/auth/register", {
-      //   name,
-      //   email,
-      //   password,
-      //   role,
-      // }
-      const { data } = await registerUser({
+      const { data } = await api.post("/auth/register", {
         name,
         email,
         password,
@@ -53,11 +45,7 @@ export default function Register() {
     setError("");
     setLoading(true);
     try {
-      // const { data } = await api.post("/auth/verify", {
-      //   userId: tempUserId,
-      //   code,
-      // });
-      const { data } = await verifyUser({
+      const { data } = await api.post("/auth/verify", {
         userId: tempUserId,
         code,
       });
@@ -65,11 +53,11 @@ export default function Register() {
       if (!data.token) throw new Error("No token returned");
 
       localStorage.setItem("token", data.token);
-
-
+      
+      
       const userInfo = {
         id: tempUserId,
-        name: name,
+        name: name, 
         email: email,
         role: role
       };
@@ -78,9 +66,9 @@ export default function Register() {
 
       // Navigate to correct dashboard
       if (role === "recruiter") {
-        nav('/hr-dashboard/job-management');
+          nav('/hr-dashboard/job-management');
       } else {
-        nav('/jobs');
+          nav('/jobs');
       }
 
     } catch (err) {
@@ -192,13 +180,13 @@ export default function Register() {
                   <form onSubmit={verifyCode} className="space-y-6">
                     <div className="flex justify-center gap-3">
                       <input
-                        type="text"
-                        maxLength="6"
-                        placeholder="123456"
-                        className="w-full text-center text-3xl font-bold border rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none py-4"
-                        value={code}
-                        onChange={(e) => setCode(e.target.value)}
-                      />
+                          type="text"
+                          maxLength="6"
+                          placeholder="123456"
+                          className="w-full text-center text-3xl font-bold border rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none py-4"
+                          value={code}
+                          onChange={(e) => setCode(e.target.value)}
+                        />
                     </div>
 
                     {/* Verify Button */}
