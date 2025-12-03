@@ -7,7 +7,9 @@ const __dirname = path.dirname(__filename);
 
 
 
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+// dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config();
+
 
 console.log("DEBUG - Mongo URI:", process.env.MONGO_URI);
 
@@ -21,7 +23,7 @@ import aiRoutes from "./routes/ai.js";
 import jobRoutes from "./routes/jobs.js"; 
 import applicationRoutes from "./routes/applications.js";
 
-dotenv.config({ path: "../.env" }); 
+// dotenv.config({ path: "../.env" }); 
 
 const app = express();
 
