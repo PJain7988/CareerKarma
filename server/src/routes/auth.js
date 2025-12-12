@@ -10,13 +10,23 @@ const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString()
 
 const sendOTPEmail = async (email, otp) => {
   console.log("initiated otp")
+  // const transporter = nodemailer.createTransport({
+  //   service: "smtp.gmail.com",
+  //   auth: {
+  //     user: process.env.EMAIL_USER,
+  //     pass: process.env.EMAIL_PASS,
+  //   },
+  // });
   const transporter = nodemailer.createTransport({
-    service: "smtp.gmail.com",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
   console.log("transporter set")
 
   await transporter.sendMail({
