@@ -9,6 +9,7 @@ const router = express.Router();
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
 const sendOTPEmail = async (email, otp) => {
+  console.log("initiated otp")
   const transporter = nodemailer.createTransport({
     service: "smtp.gmail.com",
     auth: {
@@ -16,6 +17,7 @@ const sendOTPEmail = async (email, otp) => {
       pass: process.env.EMAIL_PASS,
     },
   });
+  console.log("transporter set")
 
   await transporter.sendMail({
     from: `"Job Portal" <${process.env.EMAIL_USER}>`,
@@ -23,6 +25,8 @@ const sendOTPEmail = async (email, otp) => {
     subject: "Verify your email",
     text: `Your OTP for email verification is ${otp}. It will expire in 10 minutes.`,
   });
+
+  console.log("mail sent")
 };
 
 
