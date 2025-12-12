@@ -10,7 +10,7 @@ const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString()
 
 const sendOTPEmail = async (email, otp) => {
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    service: "smtp.gmail.com",
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
